@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+<script>
+
+//var target = 600851475143;
+var target = 100000;
+
+// 素数だとtrue, 素数でないとfalseを返す
+// 素数プールの中にある数で割り切れたら「素数でない」と判定
+function isPrime( num, primePool )
+{
+    for( var i = 1 ; i < primePool.length ; i++ ){
+	if(( num %  primePool[i] ) == 0 ){
+	    return false;
+	}
+    }
+    return true;
+}
+
+// 素数のプールを作る
+// 最大の素因数でも (2*素因数=ターゲット)になるので、プールの最大値は(ターゲット/2)とする
+// ハッシュで保持する(キーが素数、Valueが1)
+var primes = new Array();
+for( var i = 1 ; i <= ( target / 2 ) ; i++ ){
+    if( isPrime( i , primes ) == true ){
+	primes.push( i );
+    }
+}
+
+// targetの最大の素因数を求める
+// 素数かどうかは素数プールに入っているかどうかで判定
+// (target/2)の値からデクリメントしながら調査する
+var isSeached = false;
+
+for ( var i = ( target / 2 ) ; i > 1 ; i-- ){
+    for( var pIndex = 1 ; pIndex < primes.length ; pIndex++ ){
+	if( i == primes[pIndex] ){
+	    isSeached = true;
+	    alert( i );
+	    break;
+	}
+    }
+    if( isSeached == true ){
+	break;
+    }
+}
+
+
+</script>
+</body>
+</html>
