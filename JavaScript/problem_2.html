@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+<script>
+/* Even Fibonacci numbers */
+
+startNumber = 1;
+maxNumber = 4000000;
+
+back1 = 0;
+back2 = 1;
+
+count = 1;
+sum = 0;
+fnum = 1;
+
+while( fnum <= maxNumber ){
+    fnum = back1 + back2;
+
+    if(( fnum % 2 ) == 0 ){
+	sum = sum + fnum;
+    }
+    back1 = back2;
+    back2 = fnum;
+    count++;
+}
+
+alert( sum );
+</script>
+
+<div id="console">
+</div>
+
+</body>
+</html>
