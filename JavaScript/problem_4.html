@@ -1,0 +1,78 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+
+<script>
+
+// 回文数ならtrueを返す。回文数でないならfalseを返す。
+function isPalindrome( num ){
+
+    var targetString = convertToOddDigit( num );
+
+    if( targetString.length == 1 ){
+	return true;
+    }
+
+    var centerIndex = ( targetString.length / 2 ) - 1;
+
+    var front = targetString.substr( 0, centerIndex + 1 );
+    var last = targetString.substr( centerIndex + 1, targetString.length ).split("").reverse().join("") ;
+
+    if( front == last ){
+	return true;
+    }
+    return false;
+}
+
+
+// 桁数が奇数なら、回文数チェック用の偶数桁に変換する
+function convertToOddDigit( num ){
+
+    var stringNum = String(num);
+    if(( stringNum.length % 2 ) == 0 ){
+	return stringNum;
+    }
+
+    if( stringNum.length == 1 ){
+	return ( stringNum + stringNum );
+    }
+
+    var digitCount = stringNum.length;
+    var doubledIndex = Math.ceil( digitCount / 2 ) - 1 ;
+
+    var oddDigitNum = stringNum.substr(0, doubledIndex + 1 );
+    oddDigitNum += stringNum.substr( doubledIndex, doubledIndex );
+    oddDigitNum += stringNum.substr( ( doubledIndex + 1 ), stringNum.length );
+
+    return oddDigitNum;
+}
+
+
+// 1x1 ~ 999x999の範囲なので、探索範囲は1x1~1x999, 2x2~2x999, 3x3~3x999.... 999x999~9x999 とする
+
+var searchMaxNumber = 999;
+var palindoromes = new Array();
+
+for( var x = 1 ; x <= searchMaxNumber ; x++ ){
+    for( var y = x ; y <= searchMaxNumber ; y++ ){
+	var multi = x * y;
+	if( isPalindrome( multi ) == true ){
+	    palindoromes[ multi ] = x.toString() + "," + y.toString() ;
+	}
+    }
+}
+
+var maxPalindrome = palindoromes.length - 1;
+
+var tmp = palindoromes[maxPalindrome].split(",");
+var maxX = tmp[0];
+var maxY = tmp[1];
+
+alert( "MAX : " + maxX * maxY + " ( " + maxX + " x " + maxY + " ) " );
+
+</script>
+</body>
+</html>
