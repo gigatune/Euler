@@ -23,9 +23,10 @@ var isPrime = new Array();
 for( var i = 1 ; i < searchMax ; i++ ){
     isPrime[i] = true;
 }
+isPrime[1] = false;
 
 // エラトステネスのふるいで、素数でなかったらisPrime[num]の値をfalseにする
-for( var i = 2 ; i <= searchMax ; i++ ){
+for( var i = 1 ; i <= searchMax ; i++ ){
     if( isPrime[i] == true ){  // 素数だったら倍数をふるい落とす
 	var searchKey = i;
 	while( searchKey < searchMax ){
@@ -37,7 +38,7 @@ for( var i = 2 ; i <= searchMax ; i++ ){
 
 // 素因数かどうかの判定
 var primeFactors = new Array();
-for( var i = 2 ; i <= searchMax ; i++ ){
+for( var i = 1 ; i <= searchMax ; i++ ){
     if( ( target % i ) == 0 ){  // 因数だったら
 	if( isPrime[i] == true  ){  // 因数が素数だったら
 	    primeFactors.push( i );
