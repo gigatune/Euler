@@ -51,7 +51,7 @@ function convertToOddDigit( num ){
 }
 
 
-// 1x1 ~ 999x999の範囲なので、探索範囲は1x1~1x999, 2x2~2x999, 3x3~3x999.... 999x999~9x999 とする
+// 1x1 ~ 999x999の範囲なので、探索範囲は1x1~1x999, 2x2~2x999, 3x3~3x999.... 999x999~999x999 とする
 
 var searchMaxNumber = 999;
 var palindoromes = new Array();
@@ -60,18 +60,12 @@ for( var x = 1 ; x <= searchMaxNumber ; x++ ){
     for( var y = x ; y <= searchMaxNumber ; y++ ){
 	var multi = x * y;
 	if( isPalindrome( multi ) == true ){
-	    palindoromes[ multi ] = x.toString() + "," + y.toString() ;
+	    palindoromes.push( multi );
 	}
     }
 }
 
-var maxPalindrome = palindoromes.length - 1;
-
-var tmp = palindoromes[maxPalindrome].split(",");
-var maxX = tmp[0];
-var maxY = tmp[1];
-
-alert( "MAX : " + maxX * maxY + " ( " + maxX + " x " + maxY + " ) " );
+alert( Math.max.apply(null, palindoromes ) );
 
 </script>
 </body>
