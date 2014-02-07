@@ -10,44 +10,13 @@
 // 回文数ならtrueを返す。回文数でないならfalseを返す。
 function isPalindrome( num ){
 
-    var targetString = convertToOddDigit( num );
+    var targetString = String( num );
+    var reversedString = targetString.split("").reverse().join("");
 
-    if( targetString.length == 1 ){
-	return true;
-    }
-
-    var centerIndex = ( targetString.length / 2 ) - 1;
-
-    var front = targetString.substr( 0, centerIndex + 1 );
-    var last = targetString.substr( centerIndex + 1, targetString.length ).split("").reverse().join("") ;
-
-    if( front == last ){
+    if( targetString == reversedString ){
 	return true;
     }
     return false;
-}
-
-
-// 桁数が奇数なら、回文数チェック用の偶数桁に変換する
-function convertToOddDigit( num ){
-
-    var stringNum = String(num);
-    if(( stringNum.length % 2 ) == 0 ){
-	return stringNum;
-    }
-
-    if( stringNum.length == 1 ){
-	return ( stringNum + stringNum );
-    }
-
-    var digitCount = stringNum.length;
-    var doubledIndex = Math.ceil( digitCount / 2 ) - 1 ;
-
-    var oddDigitNum = stringNum.substr(0, doubledIndex + 1 );
-    oddDigitNum += stringNum.substr( doubledIndex, doubledIndex );
-    oddDigitNum += stringNum.substr( ( doubledIndex + 1 ), stringNum.length );
-
-    return oddDigitNum;
 }
 
 
